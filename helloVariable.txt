@@ -1,0 +1,11 @@
+$a = 20
+$b = $a + 30
+
+print $a
+print $b
+
+if $a == $b {
+	print $a
+} else {
+	print $b
+}
