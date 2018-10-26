@@ -28,7 +28,6 @@
 	//
 	AST_scene_list *scene_list;
 	AST_scene *scene;
-//	AST_cmd_switch_choice *switch_choice;
 	AST_cmd_choice_list *choice_list;
 	AST_cmd_choice *choice;
 	AST_parameter_list *param_list;
@@ -46,7 +45,6 @@
 // --
 %type <scene_list> scene_list "scene_list"
 %type <scene> scene "scene"
-//%type <switch_choice> switch_choice "switch choice"
 %type <choice_list> choice_list "choice list"
 %type <choice> choice "choice"
 %type <param_list> param_list "param_list"
@@ -75,7 +73,9 @@ typedef AST_exp_binary_operator::op_type op_type;
 %token <sval>	VARIABLE_NAME	"variable name"
 %token <ival>	NUMBER			"number"
 %token IF ELSE PRINT '{' '}' SWITCH CHOICE SCENE PRE MAIN POST END_GAME
-%token SHOW_VARIABLES
+%token SYS_SHOW_VARIABLES SYS_BRIGHTNESS SYS_LOAD_BACKGROUND_IMAGE SYS_LOAD_MUSIC
+%token SYS_PLAY_MUSIC SYS_WAIT SYS_FADE_IN_BRIGHTNESS SYS_FADE_OUT_MUSIC SYS_FADE_OUT_BRIGHTNESS
+%token SYS_PLAY_SOUND SYS_MOVE_SCENE
 %token <sval>	STRING_MESSAGE	"string message"
 %token <sval>	STRING_LITERAL	"string literal"
 %token <sval>	IDENTIFIER		"identifier"
@@ -118,7 +118,17 @@ command			: PRINT expression { $$ = new AST_cmd_print($2); }
 				| STRING_MESSAGE { $$ = new AST_cmd_string_message($1); }
 				| SWITCH choice_list { $$ = new AST_cmd_switch_choice($2); }
 				| END_GAME { $$ = new AST_cmd_end(); }
-				| SHOW_VARIABLES { $$ = new AST_cmd_show_variables(); }
+				| SYS_SHOW_VARIABLES { $$ = new AST_cmd_show_variables(); }
+				| SYS_BRIGHTNESS '(' expression ')' { $$ = new AST_cmd_brightness($3); }
+				| SYS_LOAD_BACKGROUND_IMAGE '(' STRING_LITERAL ')' { $$ = new AST_cmd_load_background_image($3); }
+				| SYS_LOAD_MUSIC '(' STRING_LITERAL ')'  { $$ = new AST_cmd_load_music($3); }
+				| SYS_PLAY_MUSIC '(' STRING_LITERAL ')'  { $$ = new AST_cmd_play_music(); }
+				| SYS_WAIT '(' expression ')' { $$ = new AST_cmd_wait($3); }
+				| SYS_FADE_IN_BRIGHTNESS '(' experession ',' experession ')' { $$ = new AST_cmd_fade_in_brightness($3, $5); }
+				| SYS_FADE_OUT_MUSIC '(' experession ',' experession ')'  { $$ = new AST_cmd_fade_out_music($3, $5); }
+				| SYS_FADE_OUT_BRIGHTNESS '(' experession ',' experession ')' { $$ = new AST_cmd_fade_out_brightness($3, $5); }
+				| SYS_PLAY_SOUND '(' STRING_LITERAL ')'  { $$ = new AST_cmd_play_sound($3); }
+				| SYS_MOVE_SCENE '(' IDENTIFIER ')' { $$ = new AST_cmd_move_scene($3); }
 ;
 choice_list		: choice_list choice { $$->push_back($2); }
 				| choice { $$ = new AST_cmd_choice_list(); $$->push_back($1);}

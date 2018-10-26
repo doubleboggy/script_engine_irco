@@ -44,6 +44,17 @@ class AST_scene_block_list;
 class AST_cmd_end;
 //
 class AST_cmd_show_variables;
+class AST_cmd_brightness;
+class AST_cmd_load_background_image;
+class AST_cmd_load_music;
+class AST_cmd_play_music;
+class AST_cmd_wait;
+class AST_cmd_fade_in_brightness;
+class AST_cmd_fade_out_music;
+class AST_cmd_fade_out_brightness;
+class AST_cmd_play_sound;
+class AST_cmd_move_scene;
+
 
 // ///////////////////////////////////
 class AST_node
@@ -284,6 +295,8 @@ class AST_cmd_end : public AST_command
 public:
 	virtual int accept(Visitor &v);
 };
+//////////////////////////////////////////////
+// system command classes
 // ----
 class AST_cmd_show_variables : public AST_command
 {
@@ -291,6 +304,81 @@ class AST_cmd_show_variables : public AST_command
 public:
 	virtual int accept(Visitor &v);
 };
+class AST_cmd_brightness
+{
+	friend class Visitor;
+	AST_expression *expression;
+	public:
+	virtual int accept(Visitor &v);
+	AST_cmd_brightnes(AST_expression *exp);
+	virtual ~AST_cmd_brightness();
+
+};
+class AST_cmd_load_background_image
+{
+	friend class Visitor;
+	AST_exp_string_literal *string_literal;
+	public:
+	virtual int accept(Visitor &v);
+
+};
+class AST_cmd_load_music
+{
+	friend class Visitor;
+	public:
+	virtual int accept(Visitor &v);
+
+};
+class AST_cmd_play_music
+{
+	friend class Visitor;
+	public:
+	virtual int accept(Visitor &v);
+
+};
+class AST_cmd_wait
+{
+	friend class Visitor;
+	public:
+	virtual int accept(Visitor &v);
+
+};
+class AST_cmd_fade_in_brightness
+{
+	friend class Visitor;
+	public:
+	virtual int accept(Visitor &v);
+
+};
+class AST_cmd_fade_out_music
+{
+	friend class Visitor;
+	public:
+	virtual int accept(Visitor &v);
+
+};
+class AST_cmd_fade_out_brightness
+{
+	friend class Visitor;
+	public:
+	virtual int accept(Visitor &v);
+
+};
+class AST_cmd_play_sound
+{
+	friend class Visitor;
+	public:
+	virtual int accept(Visitor &v);
+
+};
+class AST_cmd_move_scene
+{
+	friend class Visitor;
+	public:
+	virtual int accept(Visitor &v);
+
+};
+
 
 // ///////////////////////////////////
 // ///////////////////////////////////
@@ -324,6 +412,17 @@ public:
 	int visit(AST_cmd_end *end);
 	//
 	int visit(AST_cmd_show_variables *show_variables);
+	int visit(AST_cmd_brightness *cmd_brightness);
+	int visit(AST_cmd_load_background_image *cmd_load_background_image);
+	int visit(AST_cmd_load_music *cmd_load_music);
+	int visit(AST_cmd_play_music *cmd_play_music);
+	int visit(AST_cmd_wait *cmd_wait);
+	int visit(AST_cmd_fade_in_brightness *cmd_fade_in_brightness);
+	int visit(AST_cmd_fade_out_music *cmd_fade_out_music);
+	int visit(AST_cmd_fade_out_brightness *cmd_fade_out_brightness);
+	int visit(AST_cmd_play_sound *cmd_play_sound);
+	int visit(AST_cmd_move_scene *cmd_move_scene);
+	
 };
 
 #endif

@@ -296,6 +296,10 @@ int AST_cmd_show_variables::accept(Visitor &v)
 {
 	return v.visit(this);
 }
+// ----
+
+
+
 
 //////////////////////////////////////
 // visitor implemetation
@@ -527,6 +531,56 @@ int Visitor::visit(AST_cmd_show_variables *cmd_show_variables) {
 	}
 	printf("\n");
 	return 0;
+}
+// ----
+int Visitor::visit(AST_cmd_brightness *cmd_brightness)
+{
+	
+}
+// ----
+int Visitor::visit(AST_cmd_load_background_image *cmd_load_background_image)
+{
+	
+}
+// ----
+int Visitor::visit(AST_cmd_load_music *cmd_load_music)
+{
+	
+}
+// ----
+int Visitor::visit(AST_cmd_play_music *cmd_play_music)
+{
+	
+}
+// ----
+int Visitor::visit(AST_cmd_wait *cmd_wait)
+{
+
+}
+// ----
+int Visitor::visit(AST_cmd_fade_in_brightness *cmd_fade_in_brightness)
+{
+	
+}
+// ----
+int Visitor::visit(AST_cmd_fade_out_music *cmd_fade_out_music)
+{
+	
+}
+// ----
+int Visitor::visit(AST_cmd_fade_out_brightness *cmd_fade_out_brightness)
+{
+	
+}
+// ----
+int Visitor::visit(AST_cmd_play_sound *cmd_play_sound)
+{
+	
+}
+// ----
+int Visitor::visit(AST_cmd_move_scene *cmd_move_scene)
+{
+	
 }
 
 

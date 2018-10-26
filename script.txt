@@ -4,10 +4,16 @@
 
 scene sn01 {
 	pre {
-		::前処理がここ
+		@brightness(0)
+		@loadBackgroundImage("darknessLake.jpg")
+		@loadMusic("tension.ogg")
+		@playMusic
+		@wait(1000)
+		@fadeInBrightness(40, 2000)
 	}
 	post {
-		::後処理がここ\i
+		@fadeOutMusic(0, 800)
+		@fadeOutBrightness(0, 800)
 	}
 	main {
 		if ($1 == false) {
@@ -22,6 +28,7 @@ scene sn01 {
 				$0 = true
 			} else {
 				::蔦だと思ったものは人の髪の毛だった。
+				@playSound("surprising.ogg")
 				$3 = true
 			}
 		}  choice ("取る", $0 == true) {
@@ -32,7 +39,8 @@ scene sn01 {
 					$2 = true
 				} else {
 					::ここまでしか作ってないです
-					end
+					@moveScene(sn02)
+					//@end
 				}
 			}  choice ("髪の毛", $3 == true && $4 != true) {
 				::ブチッ\i
@@ -43,7 +51,19 @@ scene sn01 {
 	}
 }
 
-
+scene sn02 {
+	pre {
+		@brightness(0)
+		@loadMusic("horror.ogg")
+		@playMusic
+		@fadeInBrightness(60, 1000)
+	}
+	post {
+	}
+	main {
+		
+	}
+}
 
 
 

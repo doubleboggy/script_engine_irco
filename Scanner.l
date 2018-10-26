@@ -47,7 +47,7 @@ std::string str_buffer;
 <INITIAL>"post"		{ return token::POST; }
 <INITIAL>"main"		{ return token::MAIN; }
 <INITIAL>"end"		{ return token::END_GAME; }
-<INITIAL>"@show_variables"	{ return token::SHOW_VARIABLES; }
+<INITIAL>"@show_variables"	{ return token::SYS_VARIABLES; }
 <INITIAL>"//"		{ BEGIN _CPPCMT; }
 <INITIAL>"/*"		{ BEGIN _CCMT; }
 <INITIAL>"::"		{ str_buffer.clear(); BEGIN _STR_MSG; }
