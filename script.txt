@@ -1,0 +1,70 @@
+// 
+// the largest script is below:
+// /Volumes/disk1/hobby/programming/textbased/flexbisonInCPP2018/successful/2018.05/(2018.05.04)adv01script/adv01script_sample/adv01sample.scr
+
+scene sn01 {
+	pre {
+		@brightness(0, 0)
+		@loadBackgroundImage("darknessLake.jpg")
+		@loadMusic("tension.ogg")
+		@playMusic
+		@wait(1000)
+		@brightness(40, 2000)
+	}
+	post {
+		@fadeOutMusic(0, 800)
+		@brightness(0, 800)
+	}
+	main {
+		if ($1 == false) {
+			::足元になにか落ちているようだ。
+			$1 = true
+		}
+		::これはなんだろう。
+		switch choice ("見る") {
+			if ($2 != true) {
+				::気味の悪い人形だ。\i
+				::木でできているせいで所々朽ちているようだ。
+				$0 = true
+			} else {
+				::蔦だと思ったものは人の髪の毛だった。
+				@playSound("surprising.ogg")
+				$3 = true
+			}
+		}  choice ("取る", $0 == true) {
+			::何を？
+			switch  choice("人形") {
+				if ($4 == false) {
+					::人形の足に蔦が絡まっている。
+					$2 = true
+				} else {
+					::ここまでしか作ってないです
+					@moveScene(sn02)
+					//@end
+				}
+			}  choice ("髪の毛", $3 == true && $4 != true) {
+				::ブチッ\i
+				::強く引っ張ると冷たく濡れた髪の毛が嫌な音を立てながらちぎれた。
+				$4 = true
+			}
+		}
+	}
+}
+
+scene sn02 {
+	pre {
+		@brightness(0, 800)
+		@loadMusic("horror.ogg")
+		@playMusic
+		@brightness(60, 1000)
+	}
+	post {
+	}
+	main {
+		
+	}
+}
+
+
+
+
